@@ -1,0 +1,4 @@
+br\unisinos\xml\calculator\BhaskaraOperationResponse.class
+br\unisinos\sistemas\distribuidos\tgb\service\SumService.class
+br\unisinos\xml\calculator\BhaskaraOperationRequest.class
+br\unisinos\sistemas\distribuidos\tgb\service\SubtractService.class
