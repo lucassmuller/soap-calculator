@@ -1,13 +1,16 @@
 package br.unisinos.sistemas.distribuidos.tgb;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import javax.xml.ws.Endpoint;
 
-@SpringBootApplication
+import br.unisinos.sistemas.distribuidos.tgb.endpoint.CalculatorEndpointImpl;
+
 public class Application {
 
+    private static final String ADDRESS = "http://127.0.0.1:8080/calculator";
+
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        Endpoint.publish(ADDRESS, new CalculatorEndpointImpl());
+        System.out.println("Running on " + ADDRESS);
     }
 
 }

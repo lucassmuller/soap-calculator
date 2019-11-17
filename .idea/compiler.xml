@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="tgb" options="-parameters" />
+      <module name="tgb" options="" />
     </option>
   </component>
 </project>

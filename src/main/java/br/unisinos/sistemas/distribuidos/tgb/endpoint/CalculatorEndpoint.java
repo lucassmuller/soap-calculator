@@ -1,51 +1,27 @@
 package br.unisinos.sistemas.distribuidos.tgb.endpoint;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ws.server.endpoint.annotation.Endpoint;
-import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
-import org.springframework.ws.server.endpoint.annotation.RequestPayload;
-import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.Style;
 
-import br.unisinos.sistemas.distribuidos.tgb.service.BhaskaraService;
-import br.unisinos.sistemas.distribuidos.tgb.service.SubtractService;
-import br.unisinos.sistemas.distribuidos.tgb.service.SumService;
-import br.unisinos.xml.calculator.BhaskaraOperationRequest;
-import br.unisinos.xml.calculator.BhaskaraOperationResponse;
-import br.unisinos.xml.calculator.SubtractOperationRequest;
-import br.unisinos.xml.calculator.SubtractOperationResponse;
-import br.unisinos.xml.calculator.SumOperationRequest;
-import br.unisinos.xml.calculator.SumOperationResponse;
+import br.unisinos.sistemas.distribuidos.tgb.request.SimpleCalcRequest;
+import br.unisinos.sistemas.distribuidos.tgb.response.SimpleCalcResponse;
 
-@Endpoint
-public class CalculatorEndpoint {
+@WebService
+@SOAPBinding(style = Style.RPC)
+public interface CalculatorEndpoint {
 
-    private static final String NAMESPACE_URI = "http://unisinos.br/xml/calculator";
+    @WebMethod
+    SimpleCalcResponse sum(final SimpleCalcRequest request);
 
-    @Autowired
-    private SumService sumService;
+    @WebMethod
+    SimpleCalcResponse subtract(final SimpleCalcRequest request);
 
-    @Autowired
-    private SubtractService subtractService;
+    @WebMethod
+    SimpleCalcResponse multiply(final SimpleCalcRequest request);
 
-    @Autowired
-    private BhaskaraService bhaskaraService;
-
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SumOperationRequest")
-    @ResponsePayload
-    public SumOperationResponse sum(@RequestPayload final SumOperationRequest request) {
-        return sumService.sum(request);
-    }
-
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SubtractOperationRequest")
-    @ResponsePayload
-    public SubtractOperationResponse subtract(@RequestPayload final SubtractOperationRequest request) {
-        return subtractService.subtract(request);
-    }
-
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "BhaskaraOperationRequest")
-    @ResponsePayload
-    public BhaskaraOperationResponse bhaskara(@RequestPayload final BhaskaraOperationRequest request) {
-        return bhaskaraService.bhaskara(request);
-    }
+    @WebMethod
+    SimpleCalcResponse divide(final SimpleCalcRequest request);
 
 }
